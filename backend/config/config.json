@@ -7,7 +7,7 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "atlas_test",
+    "database": "transcript_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
