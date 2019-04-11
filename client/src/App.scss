@@ -1,0 +1,124 @@
+@import url("http://cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css");
+
+* {
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+}
+.home-row {
+  width: 100%;
+}
+.home-container {
+  margin-top: 20vh;
+  margin-bottom: 100vh;
+}
+.bullet {
+  width: 3em;
+  align-items: center;
+  justify-content: center;
+  display: inline-flex;
+  transition: all 0.2s;
+}
+.input-bullet {
+  margin: 0;
+  margin-right: -3em;
+  width: 3em;
+  z-index: 100;
+  position: relative;
+  height: 2.4em;
+  display: inline-flex;
+}
+.point-input-container {
+  display: flex;
+  width: 100%;
+  span {
+    display: inline-flex;
+    flex-grow: 1;
+    width: 100%;
+    .point-input {
+      display: inline-flex;
+      flex-grow: 1;
+      width: 100%;
+      padding-left: 2.5em;
+    }
+  }
+}
+.point-input-invisible {
+  border: 0;
+}
+.full-width {
+  width: 100%;
+}
+.list-group-item {
+  padding-left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-result {
+  cursor: pointer;
+  &:hover {
+    background: #eee;
+  }
+}
+.link-transition-enter {
+  opacity: 0.01;
+}
+
+.link-transition-enter.link-transition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.link-transition-leave {
+  opacity: 1;
+}
+
+.link-transition-leave.link-transition-enter-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
+}
+
+textarea:focus,
+input:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.point-input {
+  resize: none;
+  padding-left: 3em;
+}
+.point-input-buttons {
+  display: flex;
+  color: #b5b5b5;
+  font-size: 1.3em;
+  padding-top: 0.2em;
+  align-items: flex-start;
+  opacity: 1;
+  &:hover {
+    opacity: 1;
+  }
+  &.point-input-buttons-active {
+    opacity: 1;
+  }
+  .icon-btn {
+    width: 1.5em;
+    text-align: center;
+    border-radius: 5px;
+    transition: all 0.1s;
+    cursor: pointer;
+    &:hover {
+      background-color: #eee;
+      color: #333;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .point-input-buttons {
+    opacity: 0;
+  }
+}
+
+.no-gutters {
+  padding-left: 0;
+  padding-right: 0;
+}

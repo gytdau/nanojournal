@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist/* && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files --source-maps",
+    "start": "yarn build && node dist/bin/www"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "dist/*"
+    ],
+    "events": {
+      "restart": "npm run build",
+      "start": "npm run build"
+    }
+  },
+  "dependencies": {
+    "global": "^4.3.2",
+    "rimraf": "^2.6.3",
+    "start": "^5.1.0"
+  }
+}
