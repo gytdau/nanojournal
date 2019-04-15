@@ -17,11 +17,11 @@ class Home extends Component {
   handleTextChange(event) {
     this.setState({ text: event.target.value });
   }
-  submit(action) {
+  submit() {
     Axios.post("/items/create", {
       password: this.state.password,
       text: this.state.text,
-      action
+      action: "Doing"
     }).catch((response) => {
       console.log(response)
       alert("Failed: " + response.message)
@@ -37,11 +37,8 @@ class Home extends Component {
         <div className="row">
           <div className="col-md-8 offset-md-2">
             <h3 className="mb-4"><i className="mdi mdi-circle-outline" /> Gytis's Transcript Dashboard</h3>
-            <input className="form-control mb-2" placeholder="Password" type="password" onChange={this.handlePasswordChange.bind(this)} value={this.state.password}></input>
             <input className="form-control" onChange={this.handleTextChange.bind(this)} value={this.state.text}></input>
-            {["Consumed", "Thought", "Ate", "Felt", "Reflected", "Planning", "Doing"].map((action) => (
-              <div className="btn btn-light m-2" onClick={() => { this.submit(action) }}>{action}</div>
-            ))}
+            <div className="btn btn-light m-2" onClick={() => { this.submit() }}>Submit</div>
           </div>
         </div>
 
