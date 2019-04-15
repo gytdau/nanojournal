@@ -7,7 +7,7 @@ module.exports = ((sequelize, DataTypes) => {
     attachment: DataTypes.TEXT
   });
   Entry.associate = function (models) {
-    Point.belongsTo(models.User, { foreignKey: 'userId' })
+    Entry.belongsTo(models.User, { foreignKey: 'userId' })
   };
   return Entry;
 });

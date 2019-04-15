@@ -9,7 +9,7 @@ class Index extends Component {
             <div className="landing-page">
                 <section className="masthead">
                     <div className="container">
-                        <h3><strong><i className="mdi mdi-triangle-outline" /> Atlas</strong></h3>
+                        <h3><strong><i className="mdi mdi-circle-outline" /> Nanojournal</strong></h3>
                     </div>
                     <div className="container">
                         <div className="row"><div className="col-md-6">

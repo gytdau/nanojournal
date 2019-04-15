@@ -12,24 +12,18 @@ class DayTranscript extends Component {
         if (items) {
             items = items.map((item) => (
                 <div className="row">
-                    <div className="col-md-2 text-muted text-right">
-                        {moment(item.createdAt).format('MMMM Do, hh:mm:ss')}
-                    </div>
-                    <div className="col-md-2 text-muted text-right">
-                        {item.action}
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-9">
                         {item.text}
+                    </div>
+                    <div className="col-md-3 text-muted">
+                        {moment(item.createdAt).fromNow()}
                     </div>
                 </div>
             ))
         }
         return (
             <div className="container">
-                <div className="col-md-12">
-                    <h1>Day {this.props.day}</h1>
-                    {items}
-                </div>
+                {items}
             </div>
         );
     }

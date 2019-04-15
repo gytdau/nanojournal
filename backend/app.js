@@ -1,14 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var sassMiddleware = require('node-sass-middleware');
-var expressSession = require('express-session');
+import createError from 'http-errors'
+import express from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import sassMiddleware from 'node-sass-middleware'
+import expressSession from 'express-session'
 
-var itemsRouter = require('./routes/items');
+import itemsRouter from './routes/items'
+import usersRouter from './routes/users'
 
 import cors from 'cors';
+import './config/passport';
+import passport from "passport";
 
 var app = express();
 
@@ -30,13 +33,11 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-require('./config/passport');
-import passport from "passport";
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/items', itemsRouter);
+app.use('/users', usersRouter);
 
 
 app.use('/static', express.static(path.join(__dirname + '/../../client/build/static')))

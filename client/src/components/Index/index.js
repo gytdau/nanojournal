@@ -15,6 +15,9 @@ class Index extends Component {
                     <div className="container">
                         <h3><strong><i className="mdi mdi-circle-outline" /> Nanojournal</strong></h3>
                         <h1>Infuse zen into your work.</h1>
+
+                        <Link to="/sign_up" className="btn btn-light mr-4">Sign up</Link>
+                        <Link to="/sign_in" className="btn btn-outline-light">Sign in</Link>
                     </div>
                 </section>
                 <div className="container">
@@ -74,7 +77,7 @@ class Index extends Component {
                             <div className="card card-2">
                                 <div className="card-body">
                                     <h3>Feel better.</h3>
-                                    <p>By not getting sucked into unproductive spirals, you'll feel great and do greater.</p>
+                                    <p>As you won't get sucked into unproductive spirals, you'll feel great and do greater.</p>
                                 </div>
                             </div>
                         </div>
