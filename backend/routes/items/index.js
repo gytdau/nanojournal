@@ -59,7 +59,14 @@ router.post('/search',
   });
 
 // List past items.
-router.get('/list', async function (req, res, next) {
+router.get('/day/:date', async function (req, res, next) {
+  let date = req.params.date
+  date = moment(date)
+  const where = {
+    from: {
+        $between: [startDate, endDate]
+    }
+};
   Models.Item.findAll({ limit: 10, order: [['createdAt', 'DESC']] }).then((items) => res.json(items))
 });
 
