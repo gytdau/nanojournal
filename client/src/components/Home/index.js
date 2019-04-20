@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.scss';
+import './Home.scss';
 import Axios from 'axios';
-import DayTranscript from '../View/DayTranscript';
+import History from './History';
 import moment from 'moment';
 
 
@@ -12,11 +13,18 @@ class Home extends Component {
       password: "",
       text: "",
       items: null,
+      refreshSwitch: false,
       lastDate: moment().format(moment.HTML5_FMT.DATE)
     }
   }
   componentDidMount() {
     this.loadMore()
+    this.setState({
+      timer: setInterval(this.refresh.bind(this), 1000 * 10)
+    })
+  }
+  refresh() {
+    this.setState({ refreshSwitch: !this.state.refreshSwitch })
   }
   loadMore() {
     let { lastDate, days, items } = this.state
@@ -41,28 +49,52 @@ class Home extends Component {
         alert("Failed: " + error.message)
       }
     }).then((response) => {
-      this.setState({
-        text: ""
+      let { items } = this.state
+      items.map(item => { item.fresh = false; })
+      items.unshift({
+        ...response.data,
+        fresh: true
       })
-      this.loadMore()
+      this.setState({
+        text: "",
+        items
+      })
     })
+  }
+  keyPress(event) {
+    if (event.key === 'Enter') {
+      this.submit()
+    }
   }
   render() {
     let history = null
-    if (this.state.items != null) {
-      history = <DayTranscript items={this.state.items} day={this.state.lastDate} />
+    let { items, refreshSwitch, text } = this.state
+    if (items != null) {
+      history = <History items={items} refreshSwitch={refreshSwitch} />
     }
     return (
       <div className="container home-container">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            <h3 className="mb-4">Dashboard</h3>
-            <input className="form-control" onChange={this.handleTextChange.bind(this)} value={this.state.text}></input>
-            <div className="btn btn-light m-2" onClick={() => { this.submit() }}>Submit</div>
+            <h5 className="mb-4">What are you working on?</h5>
+            <div class="input-group mb-3">
+              <input
+                className="form-control"
+                type="text"
+                onChange={this.handleTextChange.bind(this)}
+                value={text}
+                onKeyDown={this.keyPress.bind(this)}></input>
+              <div>
+                <div className="btn btn-outline-secondary ml-2" onClick={() => { this.submit() }}>Add entry</div>
+              </div>
+            </div>
           </div>
           <div className="col-md-8 offset-md-2">
-            <h3 className="mb-4">History</h3>
             {history}
+            <div className="dashboard-promo text-center">
+              <h2>Get more insight</h2>
+              <div className="btn btn-primary">Open overview</div>
+            </div>
           </div>
         </div>
 
