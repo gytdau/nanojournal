@@ -90,10 +90,6 @@ class Home extends Component {
           </div>
           <div className="col-md-8 offset-md-2">
             {history}
-            <div className="dashboard-promo text-center">
-              <h2>Get more insight</h2>
-              <div className="btn btn-primary">Open overview</div>
-            </div>
           </div>
         </div>
 
