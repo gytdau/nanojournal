@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../App.scss';
 import './Home.scss';
 import Axios from 'axios';
 import History from './History';

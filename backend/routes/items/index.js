@@ -80,4 +80,19 @@ router.get('/day/:date', async function (req, res, next) {
   Models.Entry.findAll(query).then((items) => res.json(items))
 });
 
+// View a item.
+router.post('/before', async function (req, res, next) {
+  let date = req.params.timestamp
+  date = moment(date).toDate()
+  const query = {
+    where: {
+      createdAt: {
+        $between: [startDate, endDate]
+      },
+      userId: req.user.id
+    },
+    order: [['createdAt', 'DESC']],
+  };
+  Models.Entry.findAll(query).then((items) => res.json(items))
+});
 module.exports = router;
