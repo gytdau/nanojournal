@@ -12,7 +12,8 @@ class Index extends Component {
         super(props)
         this.state = {
             scrolling: "daytranscript",
-            lastDate: moment().format(moment.HTML5_FMT.DATE),
+            lastDate: moment().toDate(),
+            hasMore: true,
             days: [],
             items: {}
         }
@@ -23,15 +24,27 @@ class Index extends Component {
         this.loadMore()
     }
     loadMore() {
-        let { lastDate, days, items } = this.state
-        lastDate = moment(lastDate).subtract(1, 'days').format(moment.HTML5_FMT.DATE)
-        return Axios.get("/items/day/" + lastDate).catch((error) => {
+        let { lastDate, days, items, hasMore } = this.state
+        return Axios.post("/items/before", {
+            timestamp: lastDate
+        }).catch((error) => {
             console.log('error')
         }).then((response) => {
             console.log("loaded...")
-            days.push(lastDate)
-            items[lastDate] = response.data
-            this.setState({ lastDate, days })
+            response.data.map((entry) => {
+                let date = moment(entry.createdAt).format(moment.HTML5_FMT.DATE)
+                if (!items.hasOwnProperty(date)) {
+                    items[date] = [entry]
+                    days.push(date)
+                } else {
+                    items[date].push(entry)
+                }
+                lastDate = entry.createdAt
+            })
+            if (response.data.length == 0) {
+                hasMore = false
+            }
+            this.setState({ lastDate, days, items, hasMore })
         })
     }
     render() {
@@ -45,7 +58,7 @@ class Index extends Component {
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.loadMore.bind(this)}
-                    hasMore={true}
+                    hasMore={this.state.hasMore}
                     loader={<div className="loader" key={0}>Loading ...</div>}
                 >
                     {this.state.days.map((day) => (

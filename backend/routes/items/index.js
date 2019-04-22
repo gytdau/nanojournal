@@ -82,16 +82,18 @@ router.get('/day/:date', async function (req, res, next) {
 
 // View a item.
 router.post('/before', async function (req, res, next) {
-  let date = req.params.timestamp
+  let date = req.body.timestamp
   date = moment(date).toDate()
+  console.log(req)
   const query = {
     where: {
       createdAt: {
-        $between: [startDate, endDate]
+        $lt: date
       },
       userId: req.user.id
     },
     order: [['createdAt', 'DESC']],
+    limit: 10,
   };
   Models.Entry.findAll(query).then((items) => res.json(items))
 });

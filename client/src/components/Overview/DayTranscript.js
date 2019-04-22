@@ -16,13 +16,14 @@ class DayTranscript extends Component {
                         {item.text}
                     </div>
                     <div className="col-md-3 text-muted">
-                        {moment(item.createdAt).fromNow()}
+                        {moment(item.createdAt).format("HH:mm")}
                     </div>
                 </div>
             ))
         }
         return (
             <div className="container">
+                <h1>{moment(this.props.day).format("MMMM Do")}</h1>
                 {items}
             </div>
         );
