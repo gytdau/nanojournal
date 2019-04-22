@@ -7,15 +7,26 @@ import { addYears } from 'date-fns';
 class History extends Component {
     render() {
         let items = this.props.items
+        let now = moment()
+        function customTemplate() {
+            if (this.duration.asSeconds() >= 60 * 60) {
+                return "h:mm [hours]"
+            } else if (this.duration.asSeconds() >= 60) {
+                return "m [min]"
+            } else {
+                return "[just now]";
+            }
+
+        }
         if (items) {
             items = items.map((item) => (
                 <div key={item.id} className={"entry" + (item.fresh ? " entry--fresh" : "")}>
                     <div className="row">
                         <div className="col-md-9">
-                            {item.text}
-                        </div>
-                        <div className="col-md-3 text-muted">
-                            {moment(item.createdAt).fromNow()}
+                            <div className="text-muted">
+                                {moment.duration(now.diff(moment(item.createdAt))).format(customTemplate, { trim: false })}
+                            </div>
+                            <p>{item.text}</p>
                         </div>
                     </div>
                 </div>

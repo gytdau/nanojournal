@@ -4,7 +4,7 @@ import Axios from 'axios';
 import History from './History';
 import moment from 'moment';
 import Page from '../../containers/Page';
-
+import momentDurationFormat from 'moment-duration-format';
 
 class Home extends Component {
   constructor(props) {
