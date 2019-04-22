@@ -33,7 +33,7 @@
     "pg-hstore": "^2.3.2",
     "react": "^16.8.1",
     "react-addons-css-transition-group": "^15.6.2",
-    "react-autosize-textarea": "^6.0.0",
+    "react-autosize-textarea": "^7.0.0",
     "react-dom": "^16.8.1",
     "react-infinite-scroller": "^1.2.4",
     "react-keyboard-event-handler": "^1.4.1",

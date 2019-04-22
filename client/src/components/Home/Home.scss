@@ -1,3 +1,5 @@
+@import "../../Colors.scss";
+
 @keyframes slide-bottom {
   0% {
     transform: translateY(-2em);
@@ -12,4 +14,21 @@
 .entry {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+  transition: all 0.2s;
+  border-color: #eee;
+  border-radius: 5px;
+  p {
+    word-break: break-all;
+  }
+  &--expanded {
+    @include box_shadow(1);
+    padding: 1em;
+    margin-left: -1em;
+  }
+}
+.btn-icon {
+  font-size: 1.5em;
+  &:hover {
+    background-color: #eee;
+  }
 }
