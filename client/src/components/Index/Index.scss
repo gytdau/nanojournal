@@ -1,3 +1,5 @@
+@import "../../Colors.scss";
+
 .landing-page {
   .container {
     margin-top: 4em;
@@ -18,9 +20,19 @@
   background-image: url(https://images.unsplash.com/photo-1554176259-aa961fc32671?ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80);
 }
 .example {
-  background-color: #eee;
+  background-color: $nord6;
   padding: 2em 1em;
   border-radius: 1em;
+}
+.section {
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
+.section-dark {
+  background: $nord6;
+}
+.section-dark-2 {
+  background: rgb(244, 246, 249);
 }
 .landing-doers {
   padding: 2em 0;
@@ -39,4 +51,16 @@
 }
 .card-3 {
   margin-top: 8em;
+}
+.bhaMRn {
+  fill: rgb(244, 246, 249);
+  transition: fill 400ms ease-in-out 0s;
+}
+.crfQos {
+  fill: rgb(247, 249, 251);
+  transition: fill 400ms ease-in-out 0s;
+}
+.jsDSRA {
+  fill: rgb(251, 251, 252);
+  transition: fill 400ms ease-in-out 0s;
 }

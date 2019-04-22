@@ -3,6 +3,7 @@ import './Home.scss';
 import Axios from 'axios';
 import History from './History';
 import moment from 'moment';
+import Page from '../../containers/Page';
 
 
 class Home extends Component {
@@ -72,28 +73,30 @@ class Home extends Component {
       history = <History items={items} refreshSwitch={refreshSwitch} />
     }
     return (
-      <div className="container home-container">
-        <div className="row">
-          <div className="col-md-8 offset-md-2">
-            <h5 className="mb-4">What are you working on?</h5>
-            <div class="input-group mb-3">
-              <input
-                className="form-control"
-                type="text"
-                onChange={this.handleTextChange.bind(this)}
-                value={text}
-                onKeyDown={this.keyPress.bind(this)}></input>
-              <div>
-                <div className="btn btn-outline-secondary ml-2" onClick={() => { this.submit() }}>Add entry</div>
+      <Page>
+        <div className="container home-container">
+          <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <h5 className="mb-4">What are you working on?</h5>
+              <div class="input-group mb-3">
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={this.handleTextChange.bind(this)}
+                  value={text}
+                  onKeyDown={this.keyPress.bind(this)}></input>
+                <div>
+                  <div className="btn btn-outline-secondary ml-2" onClick={() => { this.submit() }}>Add entry</div>
+                </div>
               </div>
             </div>
+            <div className="col-md-8 offset-md-2">
+              {history}
+            </div>
           </div>
-          <div className="col-md-8 offset-md-2">
-            {history}
-          </div>
-        </div>
 
-      </div>
+        </div>
+      </Page>
     );
   }
 }
