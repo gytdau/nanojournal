@@ -25,8 +25,10 @@ class Entry extends Component {
         this.setState({ expanded: !this.state.expanded })
     }
     render() {
-        let { id, createdAt, fresh, text } = this.props
+        let { id, createdAt, fresh, text, absoluteTime } = this.props
         let now = moment()
+        let time = ""
+
         function customTemplate() {
             if (this.duration.asSeconds() >= 60 * 60) {
                 return "h:mm [hours]"
@@ -37,12 +39,17 @@ class Entry extends Component {
             }
 
         }
+        if (!absoluteTime) {
+            time = moment.duration(now.diff(moment(createdAt))).format(customTemplate, { trim: false })
+        } else {
+            time = moment(createdAt).format("HH:mm")
+        }
         if (this.state.expanded) {
             return <div key={id} className={"entry entry--expanded"} onClick={this.toggleExpand}>
                 <div className="row">
                     <div className="col-md-8">
                         <div className="text-muted">
-                            {moment.duration(now.diff(moment(createdAt))).format(customTemplate, { trim: false })}
+                            {time}
                         </div>
                         <p>{text}</p>
                         <div className="btn btn-outline-danger" onClick={() => { this.props.delete(this.props.id) }}>Delete</div>
@@ -57,7 +64,7 @@ class Entry extends Component {
             <div className="row">
                 <div className="col-md-9">
                     <div className="text-muted">
-                        {moment.duration(now.diff(moment(createdAt))).format(customTemplate, { trim: false })}
+                        {time}
                     </div>
                     <p>{text}</p>
                 </div>

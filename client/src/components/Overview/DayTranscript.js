@@ -5,20 +5,14 @@ import './Index.scss';
 import Axios from 'axios';
 import moment from 'moment';
 import { addYears } from 'date-fns';
+import Entry from '../Home/Entry';
 
 class DayTranscript extends Component {
     render() {
         let items = this.props.items
         if (items) {
             items = items.map((item) => (
-                <div className="row">
-                    <div className="col-md-9">
-                        {item.text}
-                    </div>
-                    <div className="col-md-3 text-muted">
-                        {moment(item.createdAt).format("HH:mm")}
-                    </div>
-                </div>
+                <Entry id={item.id} createdAt={item.createdAt} key={item.id} fresh={item.fresh} text={item.text} delete={this.props.delete} absoluteTime={true} />
             ))
         }
         return (

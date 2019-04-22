@@ -29,7 +29,7 @@ class Home extends Component {
   }
   loadMore() {
     let { lastDate, days, items } = this.state
-    return Axios.get("/items/day/" + lastDate).catch((error) => {
+    return Axios.post("/items/before", { timestamp: moment().toDate() }).catch((error) => {
       console.log('error')
     }).then((response) => {
       console.log("loaded...")

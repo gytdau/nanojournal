@@ -18,11 +18,6 @@ class Index extends Component {
             items: {}
         }
     }
-
-
-    componentDidMount() {
-        this.loadMore()
-    }
     loadMore() {
         let { lastDate, days, items, hasMore } = this.state
         return Axios.post("/items/before", {
@@ -47,6 +42,23 @@ class Index extends Component {
             this.setState({ lastDate, days, items, hasMore })
         })
     }
+    delete(id) {
+        Axios.post("/items/delete", {
+            id
+        }).catch((error) => {
+            if (error.response.status != 401) {
+                alert("Failed: " + error.message)
+            }
+        }).then((response) => {
+            this.setState({
+                scrolling: "daytranscript",
+                lastDate: moment().toDate(),
+                hasMore: true,
+                days: [],
+                items: {}
+            })
+        })
+    }
     render() {
         return (
             <div className="landing-page">
@@ -62,7 +74,7 @@ class Index extends Component {
                     loader={<div className="loader" key={0}>Loading ...</div>}
                 >
                     {this.state.days.map((day) => (
-                        <DayTranscript items={this.state.items[day]} day={day} />
+                        <DayTranscript items={this.state.items[day]} day={day} delete={this.delete.bind(this)} />
                     ))}
                 </InfiniteScroll>
             </div>
